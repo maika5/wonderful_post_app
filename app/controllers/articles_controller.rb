@@ -36,27 +36,27 @@ class ArticlesController < ApplicationController
 
 
     # PATCH/articles/1/
-    def update
+  def update
       if @article.update(article_params)
         redirect_to @article
       else
         render 'edit'
       end
-    end
+  end
 
     # DELETE /articles/1
   def destroy
     @article.destroy
       redirect_to articles_url, notice: "Article was successfully destroyed."
-    end
+  end
 
 
     private
-    def set_article
+  def set_article
       @article = Article.find(params[:id])
-    end
+  end
 
-    def article_params #ストロングパラメータ
+  def article_params #ストロングパラメータ
       params.require(:article).permit(:title, :content) #パラメーターのキー
   end
 end
