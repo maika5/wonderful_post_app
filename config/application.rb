@@ -21,8 +21,15 @@ Bundler.require(*Rails.groups)
 
 module WonderfulPostApp
   class Application < Rails::Application
+    config.time_zone = 'Tokyo'
+
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
+    # config.load_defaults 6.1
+
+     #　以下の記述を追記する(設定必須)
+    # デフォルトのlocaleを日本語(:ja)にする
+    config.i18n.default_locale = :ja
+    config.load_defaults 6.0
 
     # Configuration for the application, engines, and railties goes here.
     #

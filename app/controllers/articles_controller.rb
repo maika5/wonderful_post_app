@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
 
     # インスタンスを DB に保存する
       if @article.save
-         redirect_to article_url(@article), notice: "Article was successfully created."
+        redirect_to @article, notice: "#{t('activerecord.models.article')}を作成しました。"
       else
          render :new, status: :unprocessable_entity
       end
@@ -38,17 +38,17 @@ class ArticlesController < ApplicationController
     # PATCH/articles/1/
   def update
       if @article.update(article_params)
-        redirect_to @article
+        redirect_to @article, notice: "#{t('activerecord.models.article')}を編集しました。"
       else
-        render 'edit'
+        render :edit, status: :unprocessable_entity
       end
   end
 
     # DELETE /articles/1
   def destroy
     @article.destroy
-      redirect_to articles_url, notice: "Article was successfully destroyed."
-  end
+    redirect_to articles_url, notice: "#{t('activerecord.models.article')}を削除しました。"
+   end
 
 
     private
