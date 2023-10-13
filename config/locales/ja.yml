@@ -1,0 +1,17 @@
+
+# モデルは全て activerecord 以下に記述する。
+
+
+ja:
+  activerecord:
+   # ↓model名(つまりテーブル名)を宣言
+   models:
+    article: 記事
+
+
+# model毎に定義したいattributesを記述
+# ↓modelのattribute名(つまりテーブル名のカラム名)を宣言
+  attributes:
+    article:
+      title: タイトル
+      content: 本文
