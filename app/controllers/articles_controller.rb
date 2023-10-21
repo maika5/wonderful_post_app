@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[ show edit update destroy ]
+  skip_before_action :authenticate_user!, only: %i[ index show ]
+  before_action :set_article, only: %i[ edit update destroy ]
 
   # GET /articles
   def index
@@ -8,11 +9,12 @@ class ArticlesController < ApplicationController
 
  # GET /articles/1
   def show
+    @article = Article.find(params[:id])
   end
 
   # GET /articles/new
   def new
-    @article = Article.new
+    @article = Article.new    # 新規投稿用の空のインスタンス
   end
 
  # GET /articles/1/edit
@@ -24,7 +26,8 @@ class ArticlesController < ApplicationController
   def create
     # インスタンスを model から作成する
     # article_params メソッドが呼ばれている
-    @article = Article.new(article_params)
+    # @article = Article.new(article_params)
+    @article = current_user.articles.new(article_params)
 
     # インスタンスを DB に保存する
       if @article.save
@@ -53,7 +56,8 @@ class ArticlesController < ApplicationController
 
     private
   def set_article
-      @article = Article.find(params[:id])
+      # @article = Article.find(params[:id])
+      @article = current_user.articles.find(params[:id])
   end
 
   def article_params #ストロングパラメータ
