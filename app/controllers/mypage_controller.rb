@@ -2,6 +2,8 @@ class MypageController < ApplicationController
 
   # ログインユーザーの記事を取得
   def index
-    @articles = current_user.articles.page params[:page].per(10)
+    articles = current_user.articles
+    articles = articles.where("title LIKE ?", "%#{params[:title]}%") if params[:title].present?
+    @articles = articles.page params[:page].per(10)
   end
 end

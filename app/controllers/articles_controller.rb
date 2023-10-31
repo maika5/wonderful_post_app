@@ -4,9 +4,11 @@ class ArticlesController < ApplicationController
 
   # GET /articles
   def index
+    articles = Article.all
+    articles = articles.where('title LIKE ?', "%#{params[:title]}%")
     # ページネーションをつけたいデータに.page(params[:page])を追加
     #.per(10)を追加すると1ページに10件のみレコードを表示
-    @articles = Article.all.page(params[:page]).per(10)
+    @articles = articles.page(params[:page]).per(10)
   end
 
  # GET /articles/1
