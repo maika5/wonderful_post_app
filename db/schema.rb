@@ -25,8 +25,12 @@ ActiveRecord::Schema.define(version: 2023_11_01_130349) do
   end
 
   create_table "tag_articles", force: :cascade do |t|
+    t.bigint "tag_id"
+    t.bigint "article_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["article_id"], name: "index_tag_articles_on_article_id"
+    t.index ["tag_id"], name: "index_tag_articles_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -48,4 +52,6 @@ ActiveRecord::Schema.define(version: 2023_11_01_130349) do
   end
 
   add_foreign_key "articles", "users"
+  add_foreign_key "tag_articles", "articles"
+  add_foreign_key "tag_articles", "tags"
 end
